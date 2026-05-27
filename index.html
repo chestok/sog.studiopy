@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" sizes="180x180" href="src/logoSOG.png?v=2" <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="180x180" href="src/logoSOG.png?v=2"
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOG.STUDIOPY | Diseño y Desarrollo Web Premium</title>
 
   <!-- Tailwind CSS Play CDN -->
@@ -536,7 +536,6 @@
   <section id="sobre-sebas" class="py-24 px-6 relative overflow-hidden border-t border-white/[0.04] bg-white/[0.01]">
     <div class="max-w-7xl mx-auto">
 
-      <!-- Section head tag -->
       <div class="flex items-center space-x-2 font-mono text-xs tracking-widest text-brandOrange mb-16">
         <span>[02]</span>
         <div class="w-6 h-[1px] bg-brandOrange/50"></div>
@@ -545,22 +544,12 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:items-center py-4">
 
-        <!-- Left Column: The Interactive 3D Identity Card Wrapper -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-start items-center index-above three3d-container pt-16 lg:pt-0 sobre-sebas-card-container">
+          <div class="three3d-card relative w-full max-w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-visible glass-panel-heavy p-6 shadow-2xl flex flex-col justify-between border border-white/10">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-brandDark through-transparent to-white/[0.02] pointer-events-none z-10 rounded-[2.5rem]"></div>
 
-       <div class="lg:col-span-5 flex justify-center lg:justify-start items-center index-above three3d-container pt-16 lg:pt-0 sobre-sebas-card-container">
-  
-  <div class="three3d-card relative w-full max-w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-visible glass-panel-heavy p-6 shadow-2xl flex flex-col justify-between border border-white/10">
-    
-    </div>
-</div>
-            <!-- Card Ambient Overlay -->
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-brandDark through-transparent to-white/[0.02] pointer-events-none z-10 rounded-[2.5rem]">
-            </div>
-
-            <!-- Top brand visual accents inside the card -->
-            <div
-              class="three3d-layer-bg flex items-center justify-between text-[11px] font-mono whitespace-nowrap text-white/40 border-b border-white/5 pb-4 z-20">
+            <div class="three3d-layer-bg flex items-center justify-between text-[11px] font-mono whitespace-nowrap text-white/40 border-b border-white/5 pb-4 z-20">
               <div class="flex items-center space-x-2">
                 <div class="w-1.5 h-1.5 rounded-full bg-brandBlue animate-ping"></div>
                 <span>SOG.PASSPORT</span>
@@ -568,36 +557,22 @@
               <span>ID: PARAGUAY.2026</span>
             </div>
 
-            <!-- THE BIG EDITORIAL TYPOGRAPHY PARTIALLY BEHIND THE IMAGE -->
-            <div
-              class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none z-10 overflow-hidden uppercase select-none font-sans font-bold leading-none text-center rounded-[2.5rem]">
-              <div class="three3d-layer-mid text-[4.5rem] sm:text-[6rem] text-outline tracking-tighter opacity-75">SEBAS
-              </div>
+            <div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none z-10 overflow-hidden uppercase select-none font-sans font-bold leading-none text-center rounded-[2.5rem]">
+              <div class="three3d-layer-mid text-[4.5rem] sm:text-[6rem] text-outline tracking-tighter opacity-75">SEBAS</div>
               <div class="three3d-layer-mid text-5xl sm:text-6xl text-outline tracking-widest opacity-45">DEV</div>
-              <div class="three3d-layer-mid text-[1.8rem] sm:text-[2.5rem] text-outline tracking-wide opacity-30">
-                SYSTEMS</div>
+              <div class="three3d-layer-mid text-[1.8rem] sm:text-[2.5rem] text-outline tracking-wide opacity-30">SYSTEMS</div>
             </div>
 
-            <!-- CONTRAST HIGHLIGHT GLOW HOOP BEHIND SEBAS IMAGE 3D -->
-            <div
-              class="three3d-layer-mid absolute top-[30%] left-[10%] w-[80%] aspect-square rounded-full bg-gradient-to-b from-brandBlue to-brandOrange/80 blur-[60px] opacity-40 pointer-events-none z-0">
-            </div>
-            <div
-              class="three3d-layer-mid absolute top-[35%] left-[15%] w-[70%] aspect-square rounded-full bg-brandDark border-2 border-dashed border-white/10 opacity-70 pointer-events-none z-0 animate-[spin_40s_linear_infinite]">
-            </div>
+            <div class="three3d-layer-mid absolute top-[30%] left-[10%] w-[80%] aspect-square rounded-full bg-gradient-to-b from-brandBlue to-brandOrange/80 blur-[60px] opacity-40 pointer-events-none z-0"></div>
+            <div class="three3d-layer-mid absolute top-[35%] left-[15%] w-[70%] aspect-square rounded-full bg-brandDark border-2 border-dashed border-white/10 opacity-70 pointer-events-none z-0 animate-[spin_40s_linear_infinite]"></div>
 
-            <!-- SEBAS IMAGE popping out of boundaries -->
-            <!-- We absolute-position Sebas, making sure he stretches and breaks past the borders of the card container -->
-            <div
-              class="three3d-layer-fg absolute bottom-0 left-[-5%] w-[110%] h-[90%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
+            <div class="three3d-layer-fg absolute bottom-0 left-[-5%] w-[110%] h-[90%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
               <img src="src/IMG_8509 (3).png" alt="Sebas Ortega"
                 class="w-auto h-[135%] object-contain origin-bottom transform translate-y-3 hover:scale-105 transition-transform duration-500 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
                 style="mask-image: linear-gradient(to top, transparent 8%, black 22%); -webkit-mask-image: linear-gradient(to top, transparent 8%, black 22%);" />
             </div>
 
-            <!-- Bottom visual indicators -->
-            <div
-              class="three3d-layer-bg flex items-end justify-between z-30 pt-4 border-t border-white/5 text-[11px] font-mono text-white/40">
+            <div class="three3d-layer-bg flex items-end justify-between z-30 pt-4 border-t border-white/5 text-[11px] font-mono text-white/40">
               <div class="space-y-1">
                 <span class="block">CREATOR ROLE</span>
                 <span class="text-white font-medium font-sans text-xs">FULLSTACK FRONT</span>
@@ -611,7 +586,6 @@
           </div>
         </div>
 
-        <!-- Right Column: Biography Copy Story -->
         <div class="lg:col-span-7 space-y-8 sobre-sebas-text-content">
           <div class="space-y-2">
             <span class="text-brandBlue font-mono text-xs uppercase tracking-widest">[ Quién Diseña tu Web ]</span>
@@ -625,7 +599,6 @@
             </p>
           </div>
 
-          <!-- EXACT SPECIFIED CORE STORY TEXT (CRITICAL REQUIREMENT) -->
           <div class="space-y-6 text-white/70 text-base md:text-lg leading-relaxed font-light font-sans max-w-2xl">
             <p>
               Soy Sebas, estudiante de Análisis de Sistemas y desarrollador web en formación. Me enfoco en el diseño y
@@ -641,40 +614,24 @@
             </p>
           </div>
 
-          <!-- High-fidelity tags representing competencies -->
           <div class="flex flex-wrap gap-2 pt-4">
-            <span
-              class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandBlue/30 hover:text-white transition-all duration-300 cursor-default">
-              #AnálisisSistemas
-            </span>
-            <span
-              class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandOrange/30 hover:text-white transition-all duration-300 cursor-default">
-              #UIUXDesign
-            </span>
-            <span
-              class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandBlue/30 hover:text-white transition-all duration-300 cursor-default">
-              #FrontendEng
-            </span>
-            <span
-              class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandOrange/30 hover:text-white transition-all duration-300 cursor-default">
-              #FigmaPrototyping
-            </span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandBlue/30 hover:text-white transition-all duration-300 cursor-default">#AnálisisSistemas</span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandOrange/30 hover:text-white transition-all duration-300 cursor-default">#UIUXDesign</span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandBlue/30 hover:text-white transition-all duration-300 cursor-default">#FrontendEng</span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandOrange/30 hover:text-white transition-all duration-300 cursor-default">#FigmaPrototyping</span>
           </div>
 
-          <!-- Mini Metrics container -->
           <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 border-t border-white/5">
             <div class="space-y-1">
               <span class="block text-[11px] font-mono text-white/40">UBICACIÓN</span>
               <span class="text-white font-medium text-sm flex items-center gap-1.5">
-                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brandBlue"></i>
-                Paraguay
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brandBlue"></i>Paraguay
               </span>
             </div>
             <div class="space-y-1">
               <span class="block text-[11px] font-mono text-white/40">SOPORTE DE TRABAJO</span>
               <span class="text-white font-medium text-sm flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brandOrange"></i>
-                100% Remoto
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brandOrange"></i>100% Remoto
               </span>
             </div>
           </div>
