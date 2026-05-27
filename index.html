@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOG.STUDIOPY | Diseño y Desarrollo Web Premium</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#7EA6E8',
+            brandOrange: '#FF9800',
+            brandDark: '#111111',
+            brandDarker: '#080808',
+            brandLight: '#FFFFFF',
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono, Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <!-- GSAP Core & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis CSS & JS for perfect smooth scrolling support -->
+  <link rel="stylesheet" href="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.css">
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom CSS premium file -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Core Premium Interaction Script -->
+  <script src="./script.js" defer></script>
+</head>
+<body class="bg-brandDark text-white scrollbar-thin select-none selection:bg-brandBlue selection:text-brandDark">
+
+  <!-- CSS Ambient Noise & Particles overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Custom Fluid Cursor Elements -->
+  <div class="custom-cursor hidden md:block" id="cursor-dot"></div>
+  <div class="custom-cursor-follower hidden md:block" id="cursor-follower"></div>
+
+  <!-- Drifting Ambient Glow Blobs -->
+  <div class="glow-blob glow-blue glow-blob-1 w-[40vw] h-[40vw] top-[10%] left-[-10%] opacity-20"></div>
+  <div class="glow-blob glow-orange glow-blob-2 w-[45vw] h-[45vw] bottom-[20%] right-[-10%] opacity-20"></div>
+  <div class="glow-blob glow-blue w-[35vw] h-[35vw] top-[50%] right-[20%] opacity-15"></div>
+
+  <!-- HEADER / TRANSPARENT STICKY NAVBAR -->
+  <header class="fixed top-0 left-0 w-full z-50 border-b border-white/[0.04] glass-panel transition-all duration-300 transform">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- LOGO PLACEHOLDER WITH GLASS EFFECT -->
+      <a href="#inicio" class="flex items-center space-x-3 group header-logo-holder">
+        <div class="w-16 h-16 flex items-center justify-center relative overflow-visible">
+          <img src="src/logoSOG.png" alt="SOG Logo" class="w-50 h-50 object-contain z-10 transform scale-125 group-hover:scale-145 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: block;" />
+          <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-xl font-mono tracking-wider z-0" style="display: none;">S</span>
+        </div>
+        <span class="text-xl font-bold tracking-tight font-sans text-white group-hover:text-brandBlue transition-colors duration-300">
+          SOG.STUDIO<span class="text-brandBlue group-hover:text-brandOrange transition-colors duration-300">PY</span>
+        </span>
+      </a>
+
+      <!-- DESKTOP MENU LINKS -->
+      <nav class="hidden md:flex items-center space-x-1">
+        <a href="#inicio" class="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/[0.04] rounded-full transition-all duration-300">Inicio</a>
+        <a href="#servicios" class="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/[0.04] rounded-full transition-all duration-300">Servicios</a>
+        <a href="#sobre-sebas" class="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/[0.04] rounded-full transition-all duration-300">Sobre Sebas</a>
+        <a href="#showcase" class="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/[0.04] rounded-full transition-all duration-300">Vision 3D</a>
+        <a href="#contacto" class="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/[0.04] rounded-full transition-all duration-300 font-medium">Contacto</a>
+      </nav>
+
+      <!-- SOCIAL INDICATOR / CTA -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="https://instagram.com/sog.studiopy" target="_blank" class="text-white/60 hover:text-brandBlue transition-colors duration-300 p-2" aria-label="Instagram">
+          <i data-lucide="instagram" class="w-5 h-5"></i>
+        </a>
+        <a href="#contacto" class="btn-glowing px-5 py-2.5 text-xs font-semibold tracking-wider uppercase rounded-full border border-white/10 transition-all duration-300">
+          Empezar Proyecto
+        </a>
+      </div>
+
+      <!-- MOBILE NAV TOGGLE -->
+      <button id="menu-toggle" class="md:hidden p-2 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200" aria-label="Abrir Menú">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAVIGATION FULLSCREEN DRAWER -->
+  <div id="mobile-menu" class="fixed inset-0 w-full h-full bg-brandDark/95 backdrop-blur-xl z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex justify-end">
+    <div class="mobile-menu-content w-full max-w-sm h-full bg-brandDarker border-l border-white/5 py-8 px-8 flex flex-col justify-between shadow-2xl">
+      
+      <!-- Top actions -->
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-bold font-mono tracking-tight text-brandBlue">MENU</span>
+        <button id="menu-close" class="p-2 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Navigation links -->
+      <nav class="flex flex-col space-y-6 my-auto font-sans">
+        <a href="#inicio" class="mobile-menu-link text-3xl font-medium tracking-tight hover:text-brandBlue transition-colors duration-300 flex items-center justify-between">
+          <span>Inicio</span> <span class="text-xs font-mono text-white/20">[01]</span>
+        </a>
+        <a href="#servicios" class="mobile-menu-link text-3xl font-medium tracking-tight hover:text-brandBlue transition-colors duration-300 flex items-center justify-between">
+          <span>Servicios</span> <span class="text-xs font-mono text-white/20">[02]</span>
+        </a>
+        <a href="#sobre-sebas" class="mobile-menu-link text-3xl font-medium tracking-tight hover:text-brandBlue transition-colors duration-300 flex items-center justify-between">
+          <span>Sobre Sebas</span> <span class="text-xs font-mono text-white/20">[03]</span>
+        </a>
+        <a href="#showcase" class="mobile-menu-link text-3xl font-medium tracking-tight hover:text-brandBlue transition-colors duration-300 flex items-center justify-between">
+          <span>Vision 3D</span> <span class="text-xs font-mono text-white/20">[04]</span>
+        </a>
+        <a href="#contacto" class="mobile-menu-link text-3xl font-medium tracking-tight hover:text-brandBlue transition-colors duration-300 flex items-center justify-between">
+          <span>Contacto</span> <span class="text-xs font-mono text-white/20">[05]</span>
+        </a>
+      </nav>
+
+      <!-- Bottom info and social links -->
+      <div class="space-y-4">
+        <div class="h-[1px] bg-white/5"></div>
+        <p class="text-xs font-mono text-white/40">SOG.STUDIOPY • DISEÑO WEB PREMIUM</p>
+        <div class="flex space-x-4">
+          <a href="https://instagram.com/sog.studiopy" target="_blank" class="text-white/60 hover:text-brandBlue flex items-center space-x-2 text-sm">
+            <i data-lucide="instagram" class="w-4 h-4"></i>
+            <span>@sog.studiopy</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HERO SECTION (FULLSCREEN HIGH-IMPACT) -->
+  <section id="inicio" class="min-h-screen relative flex flex-col justify-center items-center overflow-hidden tech-grid px-6 pt-24 pb-12">
+    
+    <!-- Animated background neon vector outlines/shapes -->
+    <div class="absolute top-[25%] left-[15%] w-72 h-72 rounded-full border border-brandBlue/10 blur-[1px] floating-shape-1 pointer-events-none"></div>
+    <div class="absolute bottom-[20%] right-[15%] w-96 h-96 rounded-full border border-brandOrange/5 blur-[2px] floating-shape-2 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto text-center space-y-8 z-10">
+      
+      <!-- High-end Badge category -->
+      <div class="hero-badge inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur shadow-inner">
+        <div class="w-2 h-2 rounded-full bg-brandBlue animate-pulse"></div>
+        <span class="text-xs font-mono uppercase tracking-widest text-[#7EA6E8]/90">Estética Digital del Futuro</span>
+      </div>
+
+      <!-- High-impact Main Typography -->
+      <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-sans tracking-tight leading-[1.05] text-white">
+        Diseño web <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue via-white to-brandOrange">moderno</span> para negocios que quieren <span class="relative inline-block whitespace-nowrap"><span id="dynamic-destacar" class="inline-block font-sans font-bold text-white whitespace-nowrap">destacar</span><span class="absolute bottom-[-2px] left-0 w-full h-[3px] bg-gradient-to-r from-brandBlue to-brandOrange rounded-full opacity-65"></span></span>.
+      </h1>
+
+      <!-- Elegant detailed Sub-typography -->
+      <p class="hero-subtext text-lg md:text-xl text-white/60 max-w-2xl mx-auto font-sans font-light leading-relaxed">
+        Creamos experiencias digitales modernas, rápidas y visualmente impactantes para emprendedores y empresas con foco en la conversión y la sofisticación móvil.
+      </p>
+
+      <!-- Advanced microinteractive Action Triggers -->
+      <div class="hero-actions flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a href="#servicios" class="group relative px-8 py-4 bg-white text-brandDark font-medium font-sans tracking-tight rounded-full overflow-hidden shadow-2xl hover:shadow-brandBlue/20 transition-all duration-300 w-full sm:w-auto text-center">
+          <span class="absolute inset-0 bg-gradient-to-r from-brandBlue to-brandOrange opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+          <span class="relative z-10 transition-colors duration-300 group-hover:text-white flex items-center justify-center gap-2">
+            Ver servicios
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+          </span>
+        </a>
+        <a href="#contacto" class="px-8 py-4 bg-brandDark hover:bg-white/[0.02] text-white font-medium rounded-full border border-white/10 hover:border-white/20 transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2">
+          Contactar
+          <div class="w-1.5 h-1.5 rounded-full bg-brandOrange"></div>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Scroll Mouse Down Indicator -->
+    <div class="hero-scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2 cursor-pointer z-10" onclick="lenis.scrollTo('#servicios')">
+      <span class="text-[10px] font-mono tracking-widest text-white/30 uppercase">Saber Más</span>
+      <div class="w-6 h-10 rounded-full border-2 border-white/10 flex justify-center p-1.5">
+        <div class="w-1 h-2 rounded-full bg-brandBlue animate-bounce"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SERVICIOS GRID SECTION (MODERNA Y PREMIUM - 10 ITEMS) -->
+  <section id="servicios" class="py-24 px-6 relative border-t border-white/[0.04]">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Editorial Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 space-y-6 md:space-y-0">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 font-mono text-xs tracking-widest text-brandBlue">
+            <span>[01]</span>
+            <div class="w-6 h-[1px] bg-brandBlue/50"></div>
+            <span>NUESTRO ARSENAL</span>
+          </div>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tight font-sans">
+            Servicios <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue to-brandOrange">Premium</span>
+          </h2>
+          <p class="text-white/60 text-lg max-w-xl font-light">
+            Creamos experiencias versátiles de fin a fin con diseño interactivo moderno y automatizaciones sólidas.
+          </p>
+        </div>
+
+        <!-- Horizontal filter chips for bento optimization -->
+        <div class="flex flex-wrap gap-2 pt-2">
+          <button class="service-filter-chip px-4 py-2 text-xs font-mono uppercase bg-white text-brandDark rounded-full transition-all duration-300 border border-white/5" data-filter="all">Todos</button>
+          <button class="service-filter-chip px-4 py-2 text-xs font-mono uppercase bg-white/5 text-white/60 rounded-full hover:bg-white/10 transition-all duration-300 border border-white/5" data-filter="design">Diseño UI</button>
+          <button class="service-filter-chip px-4 py-2 text-xs font-mono uppercase bg-white/5 text-white/60 rounded-full hover:bg-white/10 transition-all duration-300 border border-white/5" data-filter="dev">Desarrollo</button>
+          <button class="service-filter-chip px-4 py-2 text-xs font-mono uppercase bg-white/5 text-white/60 rounded-full hover:bg-white/10 transition-all duration-300 border border-white/5" data-filter="growth">Soporte y Hosting</button>
+        </div>
+      </div>
+
+      <!-- Bento Grid layout for 10 structural services -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+        <!-- [01] Landing Pages -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="design">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandBlue">
+                <i data-lucide="layout" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[01]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Diseño de Landing Pages para Negocios</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Páginas de aterrizaje de alto impacto optimizadas para capturar leads y maximizar conversiones bajo velocidad punta.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono group-hover:text-white">
+            <span class="text-brandBlue">Estética y Emocional</span>
+            <i data-lucide="sparkles" class="w-4 h-4 text-brandBlue"></i>
+          </div>
+        </div>
+
+        <!-- [02] Páginas corporativas -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="design">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandOrange">
+                <i data-lucide="building" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[02]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Páginas Web Corporativas Básicas</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Presencia digital premium para marcas y organizaciones que buscan asentar credibilidad institucional y valores.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandOrange">Identidad y Solidez</span>
+            <i data-lucide="shield-check" class="w-4 h-4 text-brandOrange"></i>
+          </div>
+        </div>
+
+        <!-- [03] Responsivos -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="design">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-[#7EA6E8]">
+                <i data-lucide="smartphone" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[03]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Diseño de Sitios Responsivos</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Optimizaciones quirúrgicas para que toda interacción fluya de forma impecable y dinámica en celulares y tablets.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandBlue">Multi-Dispositivo</span>
+            <i data-lucide="expand" class="w-4 h-4 text-brandBlue"></i>
+          </div>
+        </div>
+
+        <!-- [04] Rediseños -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="dev">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-[#FF9800]">
+                <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[04]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Rediseño de Páginas Existentes</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Renovación visual integral y modernización de código para sitios obsoletos, recuperando retención y velocidad.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandOrange">Evolutivo</span>
+            <i data-lucide="zap" class="w-4 h-4 text-brandOrange"></i>
+          </div>
+        </div>
+
+        <!-- [05] Interfaz UI en Figma -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="design">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandBlue">
+                <i data-lucide="pen-tool" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[05]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Diseño de Interfaz UI en Figma</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Planos, wireframes y prototipos interactivos meticulosos elaborados pixel-a-pixel con diseño centrado en el usuario.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandBlue">Firma Visual</span>
+            <i data-lucide="palette" class="w-4 h-4 text-brandBlue"></i>
+          </div>
+        </div>
+
+        <!-- [06] Hosting & Dominios -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="growth">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandOrange">
+                <i data-lucide="server" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[06]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Configuración de Dominio y Hosting</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Alineamos e implementamos servidores optimizados y enrutamiento SSL seguro para que tu sitio responda sin lag.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandOrange">Cloud Ready</span>
+            <i data-lucide="cloud" class="w-4 h-4 text-brandOrange"></i>
+          </div>
+        </div>
+
+        <!-- [07] WhatsApp -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="dev">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandBlue">
+                <i data-lucide="message-square" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[07]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Integración de WhatsApp</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Enlazamos tu sitio con embudos automatizados de WhatsApp para convertir leads de forma instantánea y natural.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandBlue">Comunicación Directa</span>
+            <i data-lucide="send" class="w-4 h-4 text-brandBlue"></i>
+          </div>
+        </div>
+
+        <!-- [08] Mantenimiento mensual -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="growth">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandOrange">
+                <i data-lucide="activity" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[08]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Mantenimiento Mensual</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Supervisión técnica rigurosa y patches de seguridad garantizados para sostener tu web siempre al día.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandOrange">Always Online</span>
+            <i data-lucide="heart-pulse" class="w-4 h-4 text-brandOrange"></i>
+          </div>
+        </div>
+
+        <!-- [09] Actualización de contenido -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="growth">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandBlue">
+                <i data-lucide="file-text" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[09]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Actualización de Contenido Web</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Modificamos o agregamos textos, ofertas, banners o nuevos productos a demanda para mantener tu portal fluido y fresco.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandBlue">Contenido Dinámico</span>
+            <i data-lucide="edit-3" class="w-4 h-4 text-brandBlue"></i>
+          </div>
+        </div>
+
+        <!-- [10] Velocidad Web -->
+        <div class="service-card flex flex-col justify-between p-6 sm:p-8 rounded-[1.8rem] glass-card spotlight-card min-h-[280px]" data-service-cat="dev">
+          <div class="space-y-6">
+            <div class="flex justify-between items-start">
+              <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brandOrange">
+                <i data-lucide="gauge" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-white/30">[10]</span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold font-sans">Optimización de Velocidad Web</h3>
+              <p class="text-xs text-white/60 leading-relaxed font-light">Alineamos bases y caching para que tu sitio cargue en menos de 0.5s garantizando mejor posicionamiento y retención.</p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 mt-auto flex items-center justify-between text-xs font-mono">
+            <span class="text-brandOrange">Veloz y Fluido</span>
+            <i data-lucide="rocket" class="w-4 h-4 text-brandOrange"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOBRE SEBAS SECTION (CREATIVE IDENTITY CARD + 3D PARALLAX ⚠️) -->
+  <section id="sobre-sebas" class="py-24 px-6 relative overflow-hidden border-t border-white/[0.04] bg-white/[0.01]">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section head tag -->
+      <div class="flex items-center space-x-2 font-mono text-xs tracking-widest text-brandOrange mb-16">
+        <span>[02]</span>
+        <div class="w-6 h-[1px] bg-brandOrange/50"></div>
+        <span>CREATIVO EN ACCIÓN</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:items-center py-4">
+        
+        <!-- Left Column: The Interactive 3D Identity Card Wrapper -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-start items-center index-above three3d-container pt-16 lg:pt-0">
+          <div class="three3d-card relative w-full max-w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-visible glass-panel-heavy p-6 shadow-2xl flex flex-col justify-between border border-white/10">
+            
+            <!-- Card Ambient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-brandDark through-transparent to-white/[0.02] pointer-events-none z-10 rounded-[2.5rem]"></div>
+            
+            <!-- Top brand visual accents inside the card -->
+            <div class="three3d-layer-bg flex items-center justify-between text-[11px] font-mono whitespace-nowrap text-white/40 border-b border-white/5 pb-4 z-20">
+              <div class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-brandBlue animate-ping"></div>
+                <span>SOG.PASSPORT</span>
+              </div>
+              <span>ID: PARAGUAY.2026</span>
+            </div>
+
+            <!-- THE BIG EDITORIAL TYPOGRAPHY PARTIALLY BEHIND THE IMAGE -->
+            <div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none z-10 overflow-hidden uppercase select-none font-sans font-bold leading-none text-center rounded-[2.5rem]">
+              <div class="three3d-layer-mid text-[4.5rem] sm:text-[6rem] text-outline tracking-tighter opacity-75">SEBAS</div>
+              <div class="three3d-layer-mid text-5xl sm:text-6xl text-outline tracking-widest opacity-45">DEV</div>
+              <div class="three3d-layer-mid text-[1.8rem] sm:text-[2.5rem] text-outline tracking-wide opacity-30">SYSTEMS</div>
+            </div>
+
+            <!-- CONTRAST HIGHLIGHT GLOW HOOP BEHIND SEBAS IMAGE 3D -->
+            <div class="three3d-layer-mid absolute top-[30%] left-[10%] w-[80%] aspect-square rounded-full bg-gradient-to-b from-brandBlue to-brandOrange/80 blur-[60px] opacity-40 pointer-events-none z-0"></div>
+            <div class="three3d-layer-mid absolute top-[35%] left-[15%] w-[70%] aspect-square rounded-full bg-brandDark border-2 border-dashed border-white/10 opacity-70 pointer-events-none z-0 animate-[spin_40s_linear_infinite]"></div>
+
+            <!-- SEBAS IMAGE popping out of boundaries -->
+            <!-- We absolute-position Sebas, making sure he stretches and breaks past the borders of the card container -->
+            <div class="three3d-layer-fg absolute bottom-0 left-[-5%] w-[110%] h-[90%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
+              <img src="src/IMG_8509 (3).png" alt="Sebas Ortega" class="w-auto h-[135%] object-contain origin-bottom transform translate-y-3 hover:scale-105 transition-transform duration-500 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]" style="mask-image: linear-gradient(to top, transparent 8%, black 22%); -webkit-mask-image: linear-gradient(to top, transparent 8%, black 22%);" />
+            </div>
+
+            <!-- Bottom visual indicators -->
+            <div class="three3d-layer-bg flex items-end justify-between z-30 pt-4 border-t border-white/5 text-[11px] font-mono text-white/40">
+              <div class="space-y-1">
+                <span class="block">CREATOR ROLE</span>
+                <span class="text-white font-medium font-sans text-xs">FULLSTACK FRONT</span>
+              </div>
+              <div class="text-right space-y-1">
+                <span class="block">STREAK STATUS</span>
+                <span class="text-brandBlue font-medium text-xs">CONSTANT LEARN</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Biography Copy Story -->
+        <div class="lg:col-span-7 space-y-8 sobre-sebas-text-content">
+          <div class="space-y-2">
+            <span class="text-brandBlue font-mono text-xs uppercase tracking-widest">[ Quién Diseña tu Web ]</span>
+            <h3 class="text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight">
+              Sebas Ortega
+            </h3>
+            <p class="text-sm font-mono text-brandOrange tracking-wide flex items-center gap-2">
+              <span>Analista de Sistemas en Formación</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-brandOrange"></span>
+              <span>SOG.STUDIO Fundador</span>
+            </p>
+          </div>
+
+          <!-- EXACT SPECIFIED CORE STORY TEXT (CRITICAL REQUIREMENT) -->
+          <div class="space-y-6 text-white/70 text-base md:text-lg leading-relaxed font-light font-sans max-w-2xl">
+            <p>
+              Soy Sebas, estudiante de Análisis de Sistemas y desarrollador web en formación. Me enfoco en el diseño y creación de páginas web modernas, funcionales y adaptadas a las necesidades de cada cliente.
+            </p>
+            <p>
+              Actualmente estoy en constante aprendizaje, combinando mis estudios con la práctica en proyectos reales, lo que me permite mejorar mis habilidades en desarrollo web, diseño y experiencia de usuario.
+            </p>
+            <p>
+              Mi objetivo es ayudar a emprendedores y negocios a mejorar su presencia digital con soluciones simples, efectivas y accesibles.
+            </p>
+          </div>
+
+          <!-- High-fidelity tags representing competencies -->
+          <div class="flex flex-wrap gap-2 pt-4">
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandBlue/30 hover:text-white transition-all duration-300 cursor-default">
+              #AnálisisSistemas
+            </span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandOrange/30 hover:text-white transition-all duration-300 cursor-default">
+              #UIUXDesign
+            </span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandBlue/30 hover:text-white transition-all duration-300 cursor-default">
+              #FrontendEng
+            </span>
+            <span class="px-3.5 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 text-white/50 hover:border-brandOrange/30 hover:text-white transition-all duration-300 cursor-default">
+              #FigmaPrototyping
+            </span>
+          </div>
+
+          <!-- Mini Metrics container -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 border-t border-white/5">
+            <div class="space-y-1">
+              <span class="block text-[11px] font-mono text-white/40">UBICACIÓN</span>
+              <span class="text-white font-medium text-sm flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brandBlue"></i>
+                Paraguay
+              </span>
+            </div>
+            <div class="space-y-1">
+              <span class="block text-[11px] font-mono text-white/40">SOPORTE DE TRABAJO</span>
+              <span class="text-white font-medium text-sm flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brandOrange"></i>
+                100% Remoto
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SHOWCASE: "ASÍ PODRÍA VERSE TU NEGOCIO ONLINE" (INTERACTIVE DEVICE FRAME PREVIEWS) -->
+  <section id="showcase" class="py-24 px-6 relative border-t border-white/[0.04]">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section header -->
+      <div class="text-center space-y-4 max-w-2xl mx-auto mb-16">
+        <div class="flex items-center justify-center space-x-2 font-mono text-xs tracking-widest text-brandBlue">
+          <span>[03]</span>
+          <div class="w-6 h-[1px] bg-brandBlue/50"></div>
+          <span>EL PORTAL DE TU NEGOCIO</span>
+        </div>
+        <h2 class="text-4xl md:text-6xl font-bold tracking-tight font-sans">
+          Así podría verse <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue to-brandOrange">tu negocio</span> online.
+        </h2>
+        <p class="text-white/60 text-lg font-light leading-relaxed">
+          Diseñamos simulaciones interactivas inspiradas en las mejores marcas globales. Tu portal, optimizado para todos los tamaños de pantalla existentes.
+        </p>
+      </div>
+
+      <!-- Overlapping Device Stack Container -->
+      <div class="relative w-full aspect-[16/10] md:aspect-[16/8] min-h-[380px] sm:min-h-[500px] md:min-h-0 max-w-5xl mx-auto mt-12 select-none">
+        
+        <!-- Large Desktop Safari/Chrome Mockup Frame -->
+        <div class="showcase-main-frame absolute top-0 left-0 w-[85%] h-[90%] rounded-2xl glass-panel-heavy border border-white/10 shadow-2xl overflow-hidden flex flex-col z-10">
+          
+          <!-- Mockup Header/Tab bar -->
+          <div class="bg-brandDark/80 px-4 py-3 border-b border-white/5 flex items-center justify-between">
+            <div class="flex items-center space-x-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-500/85"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/85"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/85"></div>
+            </div>
+            <div class="w-[45%] bg-white/5 rounded-lg px-3 py-1 text-[10px] font-mono text-white/40 text-center flex items-center justify-center space-x-1">
+              <i data-lucide="lock" class="w-2.5 h-2.5"></i>
+              <span>https://aura-coffee.com</span>
+            </div>
+            <div class="flex items-center space-x-2 text-white/30">
+              <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Mockup Main Scrolling Showcase Body -->
+          <!-- We set an interactive scrolling layout inside that cycles on hover! -->
+          <div id="desktop-mockup-screen" class="screen-content bg-brandDarker w-full h-full overflow-y-scroll overflow-x-hidden relative flex flex-col">
+            
+            <!-- Hero banner inside the coffee demo website -->
+            <div class="relative w-full aspect-[21/9] bg-gradient-to-tr from-[#1b120f] to-[#3d271f] p-8 md:p-12 flex items-center">
+              <div class="absolute inset-0 bg-black/30"></div>
+              <div class="relative space-y-3 max-w-lg z-10">
+                <span class="text-[10px] font-mono tracking-widest text-[#FF9800] uppercase">[ AURA PREMIUM COFFEE ]</span>
+                <h4 class="text-xl md:text-3xl font-bold tracking-tight">El Ritual del Café Elevado a Arte.</h4>
+                <p class="text-xs text-white/60 leading-relaxed font-light">Granos de origen único seleccionados meticulosamente y tostados en frío.</p>
+                <div class="flex space-x-3 pt-2">
+                  <span class="px-4 py-1.5 rounded-full bg-[#FF9800] text-black font-semibold text-[10px] tracking-tight">Comprar Ahora</span>
+                  <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-[10px]">Ver Orígenes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inside items Grid -->
+            <div class="p-8 space-y-8 bg-brandDark">
+              <div class="flex justify-between items-end border-b border-white/5 pb-4">
+                <div class="space-y-1">
+                  <span class="text-[9px] font-mono uppercase text-[#7EA6E8]">[ SELECCIÓN EXCLUSIVA ]</span>
+                  <p class="text-sm font-bold">Nuestra Colección de Origen</p>
+                </div>
+                <span class="text-xs text-white/40 font-mono">Ver todos (12)</span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 space-y-3">
+                  <div class="h-24 rounded-lg bg-[#3d271f]/60 relative overflow-hidden flex items-center justify-center p-4">
+                    <span class="text-[10px] font-mono text-white/20 uppercase">Etiopía</span>
+                  </div>
+                  <div class="space-y-1">
+                    <p class="text-xs font-bold">Etiopía Sidamo Yirgacheffe</p>
+                    <p class="text-[10px] text-white/40">Notas florales y jazmín silvestre</p>
+                  </div>
+                  <div class="flex justify-between items-center pt-2">
+                    <span class="text-xs font-mono font-bold">$18.00</span>
+                    <span class="w-6 h-6 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-[#FF9800] hover:text-black transition-colors duration-300"><i data-lucide="plus" class="w-3 h-3"></i></span>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 space-y-3">
+                  <div class="h-24 rounded-lg bg-[#273229]/60 relative overflow-hidden flex items-center justify-center p-4">
+                    <span class="text-[10px] font-mono text-white/20 uppercase">Colombia</span>
+                  </div>
+                  <div class="space-y-1">
+                    <p class="text-xs font-bold">Colombia Geisha Reserve</p>
+                    <p class="text-[10px] text-white/40">Notas de durazno, bergamota y té</p>
+                  </div>
+                  <div class="flex justify-between items-center pt-2">
+                    <span class="text-xs font-mono font-bold">$24.50</span>
+                    <span class="w-6 h-6 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-[#FF9800] hover:text-black transition-colors duration-300"><i data-lucide="plus" class="w-3 h-3"></i></span>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 space-y-3">
+                  <div class="h-24 rounded-lg bg-[#2d2836]/60 relative overflow-hidden flex items-center justify-center p-4">
+                    <span class="text-[10px] font-mono text-white/20 uppercase">Sumatra</span>
+                  </div>
+                  <div class="space-y-1">
+                    <p class="text-xs font-bold">Sumatra Black Velvet Extra</p>
+                    <p class="text-[10px] text-white/40">Sabor terroso, cedro y humo dulce</p>
+                  </div>
+                  <div class="flex justify-between items-center pt-2">
+                    <span class="text-xs font-mono font-bold">$19.20</span>
+                    <span class="w-6 h-6 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-[#FF9800] hover:text-black transition-colors duration-300"><i data-lucide="plus" class="w-3 h-3"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Extra mockup visual detail representing premium quality design -->
+              <div class="p-6 rounded-2xl bg-[#FF9800]/5 border border-[#FF9800]/10 flex items-center justify-between space-x-4">
+                <div class="space-y-1">
+                  <p class="text-xs uppercase tracking-widest text-[#FF9800] font-mono">[ SOCIO DE SUSCRIPCIÓN ]</p>
+                  <p class="text-xs font-bold">Únete al Club Premium Aura</p>
+                  <p class="text-[10px] text-white/50 font-light max-w-md">Recibe granos frescos seleccionados por catadores directo en tu negocio cada 15 días con 15% de descuento.</p>
+                </div>
+                <span class="px-5 py-2.5 rounded-full bg-white text-black text-xs font-medium whitespace-nowrap">Recibir Granos</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom status info bar of demo page -->
+          <div class="bg-brandDark text-[9px] font-mono text-white/30 border-t border-white/5 px-4 py-2 flex items-center justify-between">
+            <span>99 PERFORMANCE INDEX (LH Core Web Vitals)</span>
+            <span class="text-brandBlue">OPTIMIZADO PARA CONVERSIONES</span>
+          </div>
+
+        </div>
+
+        <!-- Small overlapping Mobile Frame on bottom-right -->
+        <div class="showcase-mobile-frame absolute bottom-[-5%] right-0 w-[170px] h-[350px] sm:w-[241px] sm:h-[500px] rounded-[2rem] sm:rounded-[2.5rem] bg-brandDarker border-[6px] sm:border-8 border-[#1a1a1a] shadow-2xl flex flex-col overflow-hidden z-20">
+          
+          <!-- Notch frame overlay -->
+          <div class="h-7 w-full bg-[#1a1a1a] flex justify-center items-end pb-1 relative">
+            <div class="w-24 h-4 bg-black rounded-b-xl flex items-center justify-center space-x-2">
+              <div class="w-1.5 h-1.5 rounded-full bg-white/10"></div>
+              <div class="w-6 h-1 rounded-full bg-white/20"></div>
+            </div>
+            <!-- Battery + Time -->
+            <span class="absolute left-4 bottom-1 text-[8px] font-mono text-white/40">12:25</span>
+            <div class="absolute right-4 bottom-1 flex items-center space-x-1 text-white/40">
+              <i data-lucide="wifi" class="w-2 h-2"></i>
+              <i data-lucide="battery" class="w-2.5 h-2.5"></i>
+            </div>
+          </div>
+
+          <!-- Mobile Screen Content (scrolling synchronized on hover) -->
+          <div id="mobile-mockup-screen" class="screen-content bg-brandDark w-full h-full overflow-y-scroll overflow-x-hidden relative flex flex-col p-4 space-y-4">
+            
+            <!-- Mobile Brand Header bar -->
+            <div class="flex justify-between items-center pb-2 border-b border-white/5">
+              <span class="text-[11px] font-bold tracking-tight">AURA COFFEE.</span>
+              <i data-lucide="align-right" class="w-4 h-4 text-white/60"></i>
+            </div>
+
+            <!-- Mobile hero visual -->
+            <div class="p-4 rounded-xl bg-gradient-to-tr from-[#1b120f] to-[#3d271f] text-center space-y-2">
+              <span class="text-[8px] font-mono uppercase tracking-widest text-[#FF9800]">[ CLUB PREMIUM ]</span>
+              <p class="text-xs font-bold leading-snug">Granos Frescos en tu Puerta.</p>
+              <span class="inline-block px-3 py-1 bg-[#FF9800] text-black rounded-full font-bold text-[8px]">Comprar</span>
+            </div>
+
+            <!-- Grid mobile -->
+            <div class="space-y-3">
+              <p class="text-[10px] font-mono text-white/30 uppercase">[ NOVEDADES ]</p>
+              
+              <div class="p-3 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between">
+                <div class="space-y-1">
+                  <p class="text-[10px] font-bold">Colombia Reserve</p>
+                  <p class="text-[8px] text-[#FF9800] font-mono">$24.50</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-white/5 flex justify-center items-center text-white"><i class="w-3 h-3" data-lucide="plus"></i></div>
+              </div>
+
+              <div class="p-3 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between">
+                <div class="space-y-1">
+                  <p class="text-[10px] font-bold">Etiopía Yirgacheffe</p>
+                  <p class="text-[8px] text-[#7EA6E8] font-mono">$18.00</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-white/5 flex justify-center items-center text-white"><i class="w-3 h-3" data-lucide="plus"></i></div>
+              </div>
+            </div>
+
+            <!-- Mobile conversion callout -->
+            <div class="p-3 rounded-lg bg-brandBlue/5 border border-brandBlue/10 text-center space-y-1">
+              <p class="text-[8px] font-mono text-brandBlue uppercase tracking-wider">CARGA EN AUTOMÁTICO</p>
+              <p class="text-[9px] font-bold leading-none">Interacciones a 60 FPS.</p>
+            </div>
+
+          </div>
+
+          <!-- Mobile navigation controller bar -->
+          <div class="h-6 w-full bg-[#1a1a1a] flex justify-center items-center">
+            <div class="w-20 h-1 bg-white/20 rounded-full"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Live Floating Stats overlay for Behance/Awwwards realism -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-16 border-t border-white/5 mt-16 text-center">
+        <div class="space-y-1 p-4 bg-white/[0.02] border border-white/5 rounded-2xl spotlight-card">
+          <p class="text-xs font-mono text-white/35">CUMPLIMIENTO</p>
+          <p class="text-xl font-bold font-mono text-brandBlue">100% Mobile</p>
+        </div>
+        <div class="space-y-1 p-4 bg-white/[0.02] border border-white/5 rounded-2xl spotlight-card">
+          <p class="text-xs font-mono text-white/35">TIEMPO RESPUESTA</p>
+          <p class="text-xl font-bold font-mono text-brandOrange">&lt; 0.4s</p>
+        </div>
+        <div class="space-y-1 p-4 bg-white/[0.02] border border-white/5 rounded-2xl spotlight-card">
+          <p class="text-xs font-mono text-white/35">RETENCIÓN ESPERADA</p>
+          <p class="text-xl font-bold font-mono text-brandBlue">95% Retain</p>
+        </div>
+        <div class="space-y-1 p-4 bg-white/[0.02] border border-white/5 rounded-2xl spotlight-card">
+          <p class="text-xs font-mono text-white/35">PROTOS FIGMA</p>
+          <p class="text-xl font-bold font-mono text-brandOrange">Fidelidad 4K</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORMULARIO & CONTACT CORES (EXTREMELY PROFESSIONAL INTEGRATION) -->
+  <section id="contacto" class="py-24 px-6 relative border-t border-white/[0.04]">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left Side: Call To Action Texts -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="flex items-center space-x-2 font-mono text-xs tracking-widest text-[#7EA6E8]">
+            <span>[04]</span>
+            <div class="w-6 h-[1px] bg-brandBlue/50"></div>
+            <span>CONSTRUYE TU SUEÑO</span>
+          </div>
+          
+          <!-- Exact requested string -->
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight text-white leading-tight">
+            ¿Listo para llevar tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue to-brandOrange">negocio al siguiente nivel</span>?
+          </h2>
+
+          <p class="text-white/60 text-lg leading-relaxed font-light">
+            Escríbenos completando el formulario. Nos pondremos en contacto contigo en menos de 24 horas hábiles para planear la transformación digital de tu emprendimiento.
+          </p>
+
+          <div class="space-y-4 pt-6">
+            <div class="flex items-center space-x-3 text-sm text-white/70">
+              <i data-lucide="mail" class="w-5 h-5 text-brandBlue"></i>
+              <span>sog.studiopy@gmail.com</span>
+            </div>
+            <div class="flex items-center space-x-3 text-sm text-white/70">
+              <i data-lucide="instagram" class="w-5 h-5 text-brandOrange"></i>
+              <span>Instagram: @sog.studiopy</span>
+            </div>
+            <div class="flex items-center space-x-3 text-sm text-white/70">
+              <i data-lucide="map" class="w-5 h-5 text-brandBlue"></i>
+              <span>Asunción, Paraguay • Soporte Global</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Clean Dark Form Panel -->
+        <div class="lg:col-span-7 rounded-[2rem] glass-panel spotlight-card p-6 sm:p-8 md:p-10 border border-white/10 relative">
+          
+          <!-- Inner card visual neon blur -->
+          <div class="absolute top-[10%] right-[10%] w-48 h-48 bg-[#FF9800]/10 rounded-full blur-[60px] pointer-events-none"></div>
+
+          <form id="premium-contact-form" action="https://formspree.io/f/mwvzaloq" method="POST" class="space-y-6 relative z-10">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="form-name" class="block text-xs font-mono uppercase tracking-widest text-white/50">Nombre Completo <span class="text-brandOrange">*</span></label>
+                <input type="text" id="form-name" name="nombre" required placeholder="Ej: Sebas Ortega" class="w-full bg-white/[0.03] border border-white/10 focus:border-brandBlue/60 focus:bg-white/[0.05] rounded-xl px-4 py-3 text-sm font-sans text-white placeholder-white/20 transition-all outline-none">
+              </div>
+
+              <div class="space-y-2">
+                <label for="form-email" class="block text-xs font-mono uppercase tracking-widest text-white/50">Correo Electrónico <span class="text-brandOrange">*</span></label>
+                <input type="email" id="form-email" name="email" required placeholder="Ej: sebas@sog.studio" class="w-full bg-white/[0.03] border border-white/10 focus:border-brandBlue/60 focus:bg-white/[0.05] rounded-xl px-4 py-3 text-sm font-sans text-white placeholder-white/20 transition-all outline-none">
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="form-whatsapp" class="block text-xs font-mono uppercase tracking-widest text-white/50">WhatsApp / Teléfono <span class="text-white/30">(Opcional)</span></label>
+              <input type="tel" id="form-whatsapp" name="whatsapp" placeholder="Ej: +595 981 000 000" class="w-full bg-white/[0.03] border border-white/10 focus:border-brandBlue/60 focus:bg-white/[0.05] rounded-xl px-4 py-3 text-sm font-sans text-white placeholder-white/20 transition-all outline-none">
+            </div>
+
+            <div class="space-y-2">
+              <label for="form-subject" class="block text-xs font-mono uppercase tracking-widest text-white/50">¿Qué tipo de proyecto necesitas?</label>
+              <select id="form-subject" name="tipo_proyecto" class="w-full bg-brandDark border border-white/10 focus:border-brandBlue/60 rounded-xl px-4 py-3 text-sm font-sans text-white/80 transition-all outline-none">
+                <option value="landing">Diseño de Landing Page Premium</option>
+                <option value="corp">Página Web Corporativa Básica</option>
+                <option value="redesign">Rediseño Web de Sitio Existente</option>
+                <option value="figma">Prototipos e Interfaz UI Figma</option>
+                <option value="other">Otro Soporte Digital</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label for="form-message" class="block text-xs font-mono uppercase tracking-widest text-white/50">Detalles de tu Idea <span class="text-brandOrange">*</span></label>
+              <textarea id="form-message" name="mensaje" required rows="4" placeholder="Cuéntanos brevemente sobre tu negocio y cuáles son tus objetivos con la página web..." class="w-full bg-white/[0.03] border border-white/10 focus:border-brandBlue/60 focus:bg-white/[0.05] rounded-xl px-4 py-3 text-sm font-sans text-white placeholder-white/20 transition-all outline-none resize-none"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-gradient-to-r from-brandBlue to-brandOrange hover:from-brandOrange hover:to-brandBlue text-black font-semibold font-sans tracking-wide uppercase text-xs rounded-xl transition-all duration-500 shadow-xl flex items-center justify-center gap-2">
+              <span>Enviar Mensaje</span>
+              <i data-lucide="send-horizontal" class="w-4 h-4"></i>
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SUCCESS NOTIFICATION DIALOG (GLASSMORPHIC MODAL BACKDROP) -->
+  <div id="success-notification" class="fixed inset-0 w-full h-full bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center invisible opacity-0 transition-all duration-300 px-6">
+    <div class="notification-card w-full max-w-md bg-brandDarker border border-white/10 px-8 py-8 rounded-[2.2rem] text-center space-y-6 shadow-2xl relative">
+      <div class="absolute inset-0 bg-gradient-to-tr from-brandBlue/5 to-brandOrange/5 rounded-[2.2rem] pointer-events-none"></div>
+      
+      <!-- Checkbox Sphere visual representation -->
+      <div class="w-16 h-16 rounded-full bg-brandBlue/10 border border-brandBlue/30 mx-auto flex items-center justify-center shadow-inner shadow-brandBlue/20">
+        <i data-lucide="check" class="w-8 h-8 text-brandBlue"></i>
+      </div>
+
+      <div class="space-y-2 relative z-10">
+        <h4 class="text-2xl font-bold font-sans tracking-tight">¡Mensaje Recibido!</h4>
+        <p class="text-sm text-white/60 leading-relaxed font-light font-sans">
+          Tu propuesta ha entrado a nuestra cola de prioridades. Sebas u otra parte del equipo se pondrá en contacto contigo muy pronto. ¡Preparemos algo increíble!
+        </p>
+      </div>
+
+      <button id="close-notification" class="w-full py-3 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 rounded-xl text-xs font-mono tracking-wider transition-all duration-300">
+        ENTENDIDO
+      </button>
+
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON (ALWAYS ON, DEEP RADAR PULSE ⚠️) -->
+  <a href="http://wa.me/595994720245?text=Hola%20SOG%20Studio!%20Quiero%20saber%20mas%20sobre%20sus%20servicios%20de%20dise%C3%B1o%20web" target="_blank" class="fixed bottom-6 right-6 z-40 whatsapp-pulse w-14 h-14 rounded-full bg-[#FF9800] text-black shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center" aria-label="WhatsApp">
+    <i data-lucide="message-circle" class="w-7 h-7 text-black stroke-[2.2]"></i>
+  </a>
+
+  <!-- MINIMALIST PREMIUM FOOTER -->
+  <footer class="py-12 px-6 border-t border-white/[0.04]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      
+      <div class="space-y-1">
+        <p class="text-sm font-sans font-bold tracking-tight text-white/90">
+          SOG.STUDIO<span class="text-brandBlue">PY</span>
+        </p>
+        <p class="text-[11px] font-mono text-white/30 uppercase tracking-widest">
+          Diseño web ultra veloz del futuro
+        </p>
+      </div>
+
+      <div class="flex items-center space-x-6 text-sm">
+        <a href="#inicio" class="text-white/50 hover:text-white transition-colors">Volver arriba</a>
+        <a href="https://instagram.com/sog.studiopy" target="_blank" class="text-brandBlue/80 hover:text-brandOrange transition-colors flex items-center space-x-1 font-mono text-xs">
+          <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+          <span>@sog.studiopy</span>
+        </a>
+      </div>
+
+      <div class="text-[10px] font-mono text-white/20">
+        &copy; 2026 SOG.STUDIO. Hecho en Paraguay. Todos los derechos reservados.
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

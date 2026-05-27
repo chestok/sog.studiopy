@@ -1,0 +1,6 @@
+{
+  "name": "SOG.STUDIOPY",
+  "description": "Portal oficial premium de SOG.STUDIOPY - Agencia de Diseño y Desarrollo Web de alto impacto en Paraguay.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

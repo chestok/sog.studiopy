@@ -1,0 +1,381 @@
+/* 
+   SOG.STUDIOPY - Premium UI/UX & Frontend Stylesheet
+   Created with custom futuristic/minimalist design tokens.
+*/
+
+:root {
+  --color-blue: #7EA6E8;
+  --color-orange: #FF9800;
+  --color-dark: #111111;
+  --color-dark-gray: #181818;
+  --color-white: #FFFFFF;
+}
+
+/* Base custom resets & styles */
+html {
+  scroll-behavior: initial; /* Lenis handles smooth scrolling */
+  background-color: var(--color-dark);
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color-white);
+  overflow-x: hidden;
+  background-color: var(--color-dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  border: 2px solid var(--color-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue);
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-heavy {
+  background: rgba(17, 17, 17, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(126, 166, 232, 0.3); /* Brand Blue with Alpha */
+  box-shadow: 0 20px 40px -15px rgba(126, 166, 232, 0.1);
+}
+
+/* Glow & Blur backgrounds */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+
+.glow-blue {
+  background: radial-gradient(circle, var(--color-blue) 0%, rgba(126, 166, 232, 0) 70%);
+}
+
+.glow-orange {
+  background: radial-gradient(circle, var(--color-orange) 0%, rgba(255, 152, 0, 0) 70%);
+}
+
+/* 3D Transform Context for Sebas identity card */
+.three3d-container {
+  perspective: 1500px;
+}
+
+.three3d-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+
+.three3d-layer-bg {
+  transform: translateZ(20px);
+}
+
+.three3d-layer-mid {
+  transform: translateZ(50px);
+}
+
+.three3d-layer-fg {
+  transform: translateZ(105px);
+}
+
+.three3d-layer-title {
+  transform: translateZ(-30px);
+}
+
+/* Typography styles */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  color: transparent;
+  transition: all 0.5s ease;
+}
+
+.text-outline:hover {
+  -webkit-text-stroke: 1px var(--color-blue);
+  text-shadow: 0 0 15px rgba(126, 166, 232, 0.3);
+}
+
+/* Animated interactive button border glow */
+.btn-glowing {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-glowing::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent, 
+    var(--color-blue), 
+    transparent, 
+    var(--color-orange), 
+    transparent
+  );
+  animation: rotateGlow 6s linear infinite;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn-glowing:hover::before {
+  opacity: 1;
+}
+
+.btn-glowing::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--color-dark);
+  border-radius: inherit;
+  z-index: -1;
+  transition: background 0.4s ease;
+}
+
+.btn-glowing:hover::after {
+  background: #181c24;
+}
+
+/* CSS Keyframes */
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(15px) rotate(-3deg); }
+}
+
+.floating-shape-1 {
+  animation: float 8s ease-in-out infinite;
+}
+
+.floating-shape-2 {
+  animation: float-delayed 10s ease-in-out infinite;
+}
+
+/* Ambient glow pulsing animation */
+@keyframes glow-pulse {
+  0%, 100% { 
+    opacity: 0.16; 
+    transform: scale(1) translateY(0) rotate(0); 
+  }
+  50% { 
+    opacity: 0.24; 
+    transform: scale(1.1) translateY(-20px) rotate(2deg); 
+  }
+}
+
+.glow-blob-1 {
+  animation: glow-pulse 12s ease-in-out infinite;
+}
+
+.glow-blob-2 {
+  animation: glow-pulse 16s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+/* Noise overlay for brutalist/premium realism */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Custom Cursor Follower */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-blue);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-cursor-follower {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(126, 166, 232, 0.4);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99998;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover States for Custom Cursor */
+.cursor-hover .custom-cursor {
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-orange);
+}
+
+.cursor-hover .custom-cursor-follower {
+  width: 48px;
+  height: 48px;
+  border-color: rgba(255, 152, 0, 0.6);
+  background-color: rgba(255, 152, 0, 0.05);
+}
+
+/* Premium Card hover glowing border & inner radial light */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(126, 166, 232, 0.04) 0%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* Custom Grid background for hero layout */
+.tech-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Custom scroll reveal initial states for GSAP protection */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Custom styles for device mockups rendering */
+.device-frame {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.screen-content {
+  scrollbar-width: none;
+}
+.screen-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* WhatsApp pulse animation */
+.whatsapp-pulse {
+  position: relative;
+}
+
+.whatsapp-pulse::before,
+.whatsapp-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--color-orange);
+  opacity: 1;
+  animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+.whatsapp-pulse::after {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
