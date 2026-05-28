@@ -98,7 +98,6 @@ body {
 
 .three3d-card {
   transform-style: preserve-3d;
-  transition: transform 0.15s ease-out;
 }
 
 .three3d-layer-bg {
