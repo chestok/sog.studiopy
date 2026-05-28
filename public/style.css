@@ -27,6 +27,12 @@ body {
   background-color: var(--color-dark);
 }
 
+html.preloader-active,
+body.preloader-active {
+  overflow: hidden;
+  height: 100%;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -114,6 +120,19 @@ body {
 
 .three3d-layer-title {
   transform: translateZ(-30px);
+}
+
+/* Prevent CSS transitions from conflicting with GSAP and hint the browser */
+.three3d-card,
+.three3d-card img,
+.three3d-layer-fg,
+.three3d-layer-mid,
+.three3d-layer-bg {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-origin: center center;
+  transition: none !important;
 }
 
 /* Typography styles */
@@ -376,5 +395,145 @@ body {
   100% {
     transform: scale(1.6);
     opacity: 0;
+  }
+}
+
+/* Preloader / Loading Screen */
+.page-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, rgba(126, 166, 232, 0.14), transparent 28%),
+              radial-gradient(circle at bottom right, rgba(255, 152, 0, 0.18), transparent 32%),
+              linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(17, 17, 17, 0.99) 100%);
+  color: #fff;
+  pointer-events: all;
+  overflow: hidden;
+}
+
+.preloader-inner {
+  width: min(92vw, 360px);
+  padding: 2rem;
+  border-radius: 2rem;
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 40px 120px -45px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  text-align: center;
+  transform: translateY(0);
+  opacity: 1;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.preloader-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.8rem;
+}
+
+.preloader-logo {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.35rem;
+  color: #fff;
+  text-shadow: 0 0 22px rgba(126, 166, 232, 0.4);
+}
+
+.preloader-subtitle {
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.preloader-ring {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 1.6rem;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg at 50% 50%, rgba(126, 166, 232, 0.95), rgba(255, 152, 0, 0.65), rgba(255, 255, 255, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 22px 80px rgba(0, 0, 0, 0.25);
+  animation: preloader-rotate 2.5s linear infinite;
+}
+
+.ring-core {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.96);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.preloader-progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin: 0 auto 1.1rem;
+}
+
+.preloader-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(126,166,232,1) 0%, rgba(255,152,0,1) 100%);
+  box-shadow: 0 0 18px rgba(126, 166, 232, 0.45);
+  animation: preloader-progress 4.5s ease-out forwards;
+}
+
+.preloader-copy {
+  font-size: 0.94rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+}
+
+.page-preloader.page-preloader-hidden .preloader-inner {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.page-preloader.page-preloader-hidden {
+  pointer-events: none;
+}
+
+@keyframes preloader-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes preloader-progress {
+  0% { width: 0%; }
+  60% { width: 68%; }
+  90% { width: 92%; }
+  100% { width: 96%; }
+}
+
+@media (max-width: 520px) {
+  .preloader-inner {
+    padding: 1.6rem;
+    border-radius: 1.75rem;
+  }
+
+  .preloader-ring {
+    width: 78px;
+    height: 78px;
+  }
+
+  .preloader-copy {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-height: 620px) {
+  .page-preloader {
+    align-items: flex-start;
+    padding-top: 3.5rem;
   }
 }

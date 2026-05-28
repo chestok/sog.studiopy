@@ -275,17 +275,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const layersBg = document.querySelectorAll('.three3d-layer-bg'); // Core card base elements
 
   if (cardContainer && card3d) {
+    // Ensure initial transform state is set via GSAP to match CSS and avoid first-frame jumps
+    gsap.set(card3d, { rotateX: 0, rotateY: 0, transformPerspective: 1000, transformOrigin: '50% 50%', force3D: true });
+    // Preserve CSS translateZ by setting z via GSAP so subsequent x/y animations keep correct depth
+    layersFg.forEach(el => gsap.set(el, { x: 0, y: 0, z: 105, force3D: true }));
+    layersMid.forEach(el => gsap.set(el, { x: 0, y: 0, z: 50, force3D: true }));
+    layersBg.forEach(el => gsap.set(el, { x: 0, y: 0, z: 20, force3D: true }));
+
     let rect = null;
 
     cardContainer.addEventListener('mouseenter', () => {
-      rect = cardContainer.getBoundingClientRect();
+      // don't cache rect here because images or content may still be loading;
+      // rect will be calculated/updated inside mousemove when needed
+      rect = null;
     });
 
     cardContainer.addEventListener('mousemove', (e) => {
       // Avoid tilt calculations on mobile or tablet screen sizes for maximum performance and fluid touch scroll
       if (window.matchMedia('(max-width: 1024px)').matches) return;
 
-      if (!rect) rect = cardContainer.getBoundingClientRect();
+      // Recompute rect when needed or when dimensions changed (prevents jumps if image loads)
+      const currentRect = cardContainer.getBoundingClientRect();
+      if (!rect || currentRect.width !== rect.width || currentRect.height !== rect.height) {
+        rect = currentRect;
+      }
       const x = e.clientX - rect.left; // x position inside the element
       const y = e.clientY - rect.top;  // y position inside the element
       
@@ -792,10 +805,47 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(changeTypographyStyle, 3500);
   }
 
-  // Refresh ScrollTrigger calculations after full window load, allowing fonts/images to layout
+  // Page preloader fade-out and load safety handler
+  const preloader = document.getElementById('page-preloader');
+  const preloaderBar = document.querySelector('.preloader-progress-bar');
+  let preloaderRemoved = false;
+
+  const removePreloader = () => {
+    if (!preloader || preloaderRemoved) return;
+    preloaderRemoved = true;
+
+    preloader.classList.add('page-preloader-hidden');
+    document.body.classList.remove('preloader-active');
+
+    if (window.gsap) {
+      gsap.to(preloader, {
+        autoAlpha: 0,
+        duration: 0.85,
+        ease: 'power2.out',
+        onComplete: () => {
+          preloader.remove();
+        }
+      });
+      gsap.to(preloaderBar, {
+        width: '100%',
+        duration: 0.4,
+        ease: 'power2.out'
+      });
+    } else {
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 900);
+    }
+  };
+
+  const preloaderTimeout = setTimeout(() => {
+    removePreloader();
+  }, 6500);
+
   window.addEventListener('load', () => {
     if (window.ScrollTrigger) {
       ScrollTrigger.refresh();
     }
+    clearTimeout(preloaderTimeout);
+    removePreloader();
   });
 });

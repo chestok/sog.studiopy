@@ -56,7 +56,24 @@
   <script src="/script.js" defer></script>
 </head>
 
-<body class="bg-brandDark text-white scrollbar-thin select-none selection:bg-brandBlue selection:text-brandDark">
+<body class="bg-brandDark text-white scrollbar-thin select-none selection:bg-brandBlue selection:text-brandDark preloader-active">
+
+  <!-- Page preloader / loading screen -->
+  <div id="page-preloader" class="page-preloader" aria-live="polite" aria-busy="true">
+    <div class="preloader-inner">
+      <div class="preloader-brand">
+        <span class="preloader-logo">SOG</span>
+        <span class="preloader-subtitle">Cargando experiencia premium</span>
+      </div>
+      <div class="preloader-ring" aria-hidden="true">
+        <div class="ring-core"></div>
+      </div>
+      <div class="preloader-progress">
+        <div class="preloader-progress-bar"></div>
+      </div>
+      <p class="preloader-copy">Tu visita se prepara en segundo plano...</p>
+    </div>
+  </div>
 
   <!-- CSS Ambient Noise & Particles overlay -->
   <div class="noise-overlay"></div>
@@ -589,7 +606,7 @@
             <div
               class="three3d-layer-fg absolute bottom-0 left-[-5%] w-[110%] h-[90%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
               <img src="src/IMG_8509 (3).png" alt="Sebas Ortega"
-                class="w-auto h-[135%] object-contain origin-bottom transform translate-y-3 hover:scale-105 transition-transform duration-500 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
+                class="w-auto h-[135%] object-contain origin-bottom transform translate-y-3 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
                 style="mask-image: linear-gradient(to top, transparent 8%, black 22%); -webkit-mask-image: linear-gradient(to top, transparent 8%, black 22%);" />
             </div>
 
