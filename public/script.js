@@ -833,6 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     } else {
       preloader.style.opacity = '0';
+      preloader.style.visibility = 'hidden';
       setTimeout(() => preloader.remove(), 900);
     }
   };

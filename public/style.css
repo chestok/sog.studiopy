@@ -501,6 +501,7 @@ body.preloader-active {
 
 .page-preloader.page-preloader-hidden {
   pointer-events: none;
+  visibility: hidden;
 }
 
 @keyframes preloader-rotate {
