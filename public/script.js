@@ -268,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 3D Mouse Tilt Interactive Parallax for Sebas' Bio Card ⚠️
+  // 3D Mouse Tilt Interactive Parallax for Sebas' Bio Card ⚠️
   const cardContainer = document.querySelector('.three3d-container');
   const card3d = document.querySelector('.three3d-card');
   const layersFg = document.querySelectorAll('.three3d-layer-fg'); // Sebas Photo
@@ -295,17 +296,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const rotateY = ((x - centerX) / centerX) * 12; // horizontal rotation
       const rotateX = -((y - centerY) / centerY) * 12; // vertical rotation
       
-      // Apply tilt to the overall card (snappier transition)
+      // SOLUCIÓN AL SALTO: Subimos la duración a 0.4 y cambiamos a power2.out para suavizar la respuesta
       gsap.to(card3d, {
         rotateX: rotateX,
         rotateY: rotateY,
         transformPerspective: 1000,
-        duration: 0.18,
+        duration: 0.4,
         ease: 'power2.out',
         overwrite: 'auto'
       });
 
-      // FG elements (Sebas winking image) pop OUT in parallax direction
+      // FG elements (Sebas image) pop OUT in parallax direction
       const moveX_fg = ((x - centerX) / centerX) * 18;
       const moveY_fg = ((y - centerY) / centerY) * 18;
       layersFg.forEach(el => {
@@ -314,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
           y: moveY_fg,
           transformPerspective: 1000,
           translateZ: 100,
-          duration: 0.18,
+          duration: 0.4,
           ease: 'power2.out',
           overwrite: 'auto'
         });
@@ -329,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
           y: moveY_mid,
           transformPerspective: 1000,
           translateZ: 40,
-          duration: 0.18,
+          duration: 0.4,
           ease: 'power2.out',
           overwrite: 'auto'
         });
@@ -343,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: moveX_bg,
           y: moveY_bg,
           translateZ: 10,
-          duration: 0.18,
+          duration: 0.4,
           ease: 'power2.out',
           overwrite: 'auto'
         });
@@ -356,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gsap.to(card3d, {
         rotateX: 0,
         rotateY: 0,
-        duration: 0.4,
+        duration: 0.6,
         ease: 'power2.out',
         overwrite: 'auto'
       });
@@ -366,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: 0,
           y: 0,
           translateZ: 80,
-          duration: 0.4,
+          duration: 0.6,
           ease: 'power2.out',
           overwrite: 'auto'
         });
@@ -377,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: 0,
           y: 0,
           translateZ: 30,
-          duration: 0.4,
+          duration: 0.6,
           ease: 'power2.out',
           overwrite: 'auto'
         });
@@ -388,159 +389,10 @@ document.addEventListener('DOMContentLoaded', () => {
           x: 0,
           y: 0,
           translateZ: 0,
-          duration: 0.4,
+          duration: 0.6,
           ease: 'power2.out',
           overwrite: 'auto'
         });
-      });
-    });
-  }
-
-  // Mobile navigation drawer toggle
-  const menuBtn = document.getElementById('menu-toggle');
-  const closeBtn = document.getElementById('menu-close');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-  function openMobileMenu() {
-    mobileMenu.classList.remove('pointer-events-none');
-    
-    // Animate glass-backdrop fade-in in parallel using GSAP to prevent flickering
-    gsap.to(mobileMenu, {
-      opacity: 1,
-      duration: 0.4,
-      ease: 'power2.out',
-      overwrite: 'auto'
-    });
-    
-    // Animate slide-in side panel with extra smooth easing
-    gsap.fromTo('.mobile-menu-content', {
-      x: '100%',
-    }, {
-      x: '0%',
-      duration: 0.6,
-      ease: 'power4.out',
-      overwrite: 'auto'
-    });
-
-    // Stagger luxury links entrance with subtle scale and 3D rotational lift
-    gsap.fromTo(mobileMenuLinks, {
-      y: 30,
-      opacity: 0,
-      rotateX: -15,
-      scale: 0.95
-    }, {
-      y: 0,
-      opacity: 1,
-      rotateX: 0,
-      scale: 1,
-      stagger: 0.08,
-      delay: 0.15,
-      duration: 0.5,
-      ease: 'power3.out',
-      overwrite: 'auto'
-    });
-  }
-
-  function closeMobileMenu() {
-    // Synchronously fade out glass backdrop and close pointer events
-    gsap.to(mobileMenu, {
-      opacity: 0,
-      duration: 0.4,
-      ease: 'power2.inOut',
-      overwrite: 'auto',
-      onComplete: () => {
-        mobileMenu.classList.add('pointer-events-none');
-      }
-    });
-
-    // Simultaneously slide out side drawer panel
-    gsap.to('.mobile-menu-content', {
-      x: '100%',
-      duration: 0.4,
-      ease: 'power3.inOut',
-      overwrite: 'auto'
-    });
-  }
-
-  if (menuBtn && mobileMenu && closeBtn) {
-    menuBtn.addEventListener('click', openMobileMenu);
-    closeBtn.addEventListener('click', closeMobileMenu);
-    
-    // Close menu when clicking a link
-    mobileMenuLinks.forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-  }
-
-  // Premium scroll to hide / reveal header behavior
-  let lastScrollY = window.scrollY;
-  const headerElement = document.querySelector('header');
-  
-  if (headerElement) {
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      
-      // Determine if the mobile menu is currently open to prevent hiding it
-      const isMobileMenuOpen = mobileMenu && mobileMenu.classList.contains('opacity-100');
-      
-      if (!isMobileMenuOpen) {
-        if (currentScrollY > 100 && currentScrollY > lastScrollY) {
-          // Scrolling down - hide header (slide it up out of frame)
-          headerElement.classList.add('-translate-y-full');
-        } else {
-          // Scrolling up or near page top (less than 100px) - show header
-          headerElement.classList.remove('-translate-y-full');
-        }
-      }
-      
-      lastScrollY = currentScrollY;
-    }, { passive: true });
-  }
-
-  // Interactive Mockups Auto-scrolling on hover or index changes
-  const desktopScreen = document.getElementById('desktop-mockup-screen');
-  const mobileScreen = document.getElementById('mobile-mockup-screen');
-
-  if (desktopScreen) {
-    // Scroll desktop screen down slowly when container is hovered to show content
-    desktopScreen.addEventListener('mouseenter', () => {
-      const scrollHeight = desktopScreen.scrollHeight - desktopScreen.clientHeight;
-      gsap.to(desktopScreen, {
-        scrollTop: scrollHeight,
-        duration: 8,
-        ease: 'power1.inOut',
-        overwrite: 'auto'
-      });
-    });
-
-    desktopScreen.addEventListener('mouseleave', () => {
-      gsap.to(desktopScreen, {
-        scrollTop: 0,
-        duration: 2,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    });
-  }
-
-  if (mobileScreen) {
-    mobileScreen.addEventListener('mouseenter', () => {
-      const scrollHeight = mobileScreen.scrollHeight - mobileScreen.clientHeight;
-      gsap.to(mobileScreen, {
-        scrollTop: scrollHeight,
-        duration: 6,
-        ease: 'power1.inOut',
-        overwrite: 'auto'
-      });
-    });
-
-    mobileScreen.addEventListener('mouseleave', () => {
-      gsap.to(mobileScreen, {
-        scrollTop: 0,
-        duration: 1.5,
-        ease: 'power2.out',
-        overwrite: 'auto'
       });
     });
   }
