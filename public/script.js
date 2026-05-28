@@ -313,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
           x: moveX_fg,
           y: moveY_fg,
           transformPerspective: 1000,
-          translateZ: 100,
           duration: 0.18,
           ease: 'power2.out',
           overwrite: 'auto'
@@ -328,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
           x: moveX_mid,
           y: moveY_mid,
           transformPerspective: 1000,
-          translateZ: 40,
           duration: 0.18,
           ease: 'power2.out',
           overwrite: 'auto'
@@ -342,7 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(el, {
           x: moveX_bg,
           y: moveY_bg,
-          translateZ: 10,
           duration: 0.18,
           ease: 'power2.out',
           overwrite: 'auto'
@@ -365,7 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(el, {
           x: 0,
           y: 0,
-          translateZ: 80,
           duration: 0.4,
           ease: 'power2.out',
           overwrite: 'auto'
@@ -376,7 +372,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(el, {
           x: 0,
           y: 0,
-          translateZ: 30,
           duration: 0.4,
           ease: 'power2.out',
           overwrite: 'auto'
@@ -387,7 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(el, {
           x: 0,
           y: 0,
-          translateZ: 0,
           duration: 0.4,
           ease: 'power2.out',
           overwrite: 'auto'
