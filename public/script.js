@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.out'
     });
 
-    gsap.from('.sobre-sebas-card-container', {
+    gsap.from('.three3d-container', {
       scrollTrigger: {
         trigger: '#sobre-sebas',
         start: 'top 80%'
