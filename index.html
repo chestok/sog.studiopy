@@ -8,7 +8,7 @@
   <title>SOG.STUDIOPY | Diseño y Desarrollo Web Premium</title>
 
   <!-- Tailwind CSS Play CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -33,24 +33,28 @@
   <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono, Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
     rel="stylesheet">
 
   <!-- GSAP Core & ScrollTrigger CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- Lenis CSS & JS for perfect smooth scrolling support -->
   <link rel="stylesheet" href="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.css">
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+  <script defer src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
 
   <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="https://unpkg.com/lucide@latest"></script>
 
 
   <!-- Custom CSS premium file -->
   <link rel="stylesheet" href="/style.css">
+
+  <!-- Preload hero image for LCP -->
 
   <!-- Core Premium Interaction Script -->
   <script src="/script.js" defer></script>
@@ -605,9 +609,14 @@
             <!-- We absolute-position Sebas, making sure he stretches and breaks past the borders of the card container -->
             <div
               class="three3d-layer-fg absolute bottom-0 left-[-5%] w-[110%] h-[90%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
-              <img src="src/IMG_8509 (3).png" alt="Sebas Ortega"
-                class="w-auto h-[135%] object-contain origin-bottom transform translate-y-3 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
-                style="mask-image: linear-gradient(to top, transparent 8%, black 22%); -webkit-mask-image: linear-gradient(to top, transparent 8%, black 22%);" />
+                <img src="src/IMG_8509 (3).png" alt="Sebas Ortega"
+                  width="1086"
+                  height="1448"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  class="w-auto h-[135%] object-contain origin-bottom transform translate-y-3 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
+                  style="mask-image: linear-gradient(to top, transparent 8%, black 22%); -webkit-mask-image: linear-gradient(to top, transparent 8%, black 22%);" />
             </div>
 
             <!-- Bottom visual indicators -->
