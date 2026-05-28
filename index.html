@@ -3,9 +3,32 @@
 
 <head>
   <meta charset="UTF-8">
-<link rel="icon" type="image/png" sizes="180x180" href="src/logoSOG.png?v=2">
+  <link rel="icon" type="image/png" sizes="180x180" href="src/logoSOG.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOG.STUDIOPY | Diseño y Desarrollo Web Premium</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#7EA6E8',
+            brandOrange: '#FF9800',
+            brandDark: '#111111',
+            brandDarker: '#080808',
+            brandLight: '#FFFFFF',
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
 
   <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono, Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +50,7 @@
 
 
   <!-- Custom CSS premium file -->
-  <link rel="stylesheet" href="/src/index.css">
+  <link rel="stylesheet" href="/style.css">
 
   <!-- Core Premium Interaction Script -->
   <script src="/script.js" defer></script>
