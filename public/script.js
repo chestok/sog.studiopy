@@ -4,6 +4,9 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches 
+    || /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
   // Initialize Lucide Icons
   if (window.lucide) {
     window.lucide.createIcons();
@@ -13,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursorDot = document.getElementById('cursor-dot');
   const cursorFollower = document.getElementById('cursor-follower');
 
-  if (cursorDot && cursorFollower && window.matchMedia('(min-width: 768px)').matches) {
+  if (!isMobile && cursorDot && cursorFollower && window.matchMedia('(min-width: 768px)').matches) {
     // Hide default OS cursor
     document.body.style.cursor = 'none';
 
@@ -79,32 +82,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Set up Lenis Smooth Scroll - faster, snappier and incredibly lightweight
+  // Set up Lenis Smooth Scroll - use native fallback on mobile to avoid render blocking
   let lenis;
-  try {
-    lenis = new Lenis({
-      duration: 0.85,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom cubic bezier
-      smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 1.2,
-      infinite: false,
-    });
-    window.lenis = lenis; // Expose globally for inline onclick scroll handlers
+  if (!isMobile) {
+    try {
+      lenis = new Lenis({
+        duration: 0.85,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom cubic bezier
+        smoothWheel: true,
+        wheelMultiplier: 1.1,
+        touchMultiplier: 1.2,
+        infinite: false,
+      });
+      window.lenis = lenis; // Expose globally for inline onclick scroll handlers
 
-    // Integrated scroll ticker connecting Lenis & GSAP ScrollTrigger
-    function raf(time) {
-      lenis.raf(time);
+      // Integrated scroll ticker connecting Lenis & GSAP ScrollTrigger
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
+      
+      // Sync ScrollTrigger with smooth scroll
+      if (window.ScrollTrigger) {
+        lenis.on('scroll', ScrollTrigger.update);
+      }
+    } catch (error) {
+      console.warn("Smooth scroll Lenis initializing failed, proceeding with standard viewport: ", error);
+      lenis = null;
+      window.lenis = {
+        scrollTo: (target) => {
+          const el = typeof target === 'string' ? document.querySelector(target) : target;
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
     }
-    requestAnimationFrame(raf);
-    
-    // Sync ScrollTrigger with smooth scroll
-    if (window.ScrollTrigger) {
-      lenis.on('scroll', ScrollTrigger.update);
-    }
-  } catch (error) {
-    console.warn("Smooth scroll Lenis initializing failed, proceeding with standard viewport: ", error);
+  } else {
+    lenis = {
+      scrollTo: (target) => {
+        const el = typeof target === 'string' ? document.querySelector(target) : target;
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    window.lenis = lenis;
   }
 
   // Handle smooth navigation for internal anchor links using Lenis ScrollTo
@@ -178,94 +198,95 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.out'
     }, '-=0.25');
 
-    // Scroll triggering reveals for Services cards
-    gsap.from('.service-card', {
-      scrollTrigger: {
-        id: 'services-reveal',
-        trigger: '#servicios',
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      y: 25,
-      stagger: 0.08,
-      duration: 0.5,
-      ease: 'power2.out',
-      clearProps: 'opacity,transform'
-    });
+    if (!isMobile) {
+      // Scroll triggering reveals for Services cards
+      gsap.from('.service-card', {
+        scrollTrigger: {
+          id: 'services-reveal',
+          trigger: '#servicios',
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        opacity: 0,
+        y: 25,
+        stagger: 0.08,
+        duration: 0.5,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform'
+      });
 
-    // Scroll trigger for Sobre Sebas section elements
-    gsap.from('.sobre-sebas-text-content', {
-      scrollTrigger: {
-        trigger: '#sobre-sebas',
-        start: 'top 80%'
-      },
-      opacity: 0,
-      x: 20,
-      duration: 0.6,
-      ease: 'power3.out'
-    });
+      // Scroll trigger for Sobre Sebas section elements
+      gsap.from('.sobre-sebas-text-content', {
+        scrollTrigger: {
+          trigger: '#sobre-sebas',
+          start: 'top 80%'
+        },
+        opacity: 0,
+        x: 20,
+        duration: 0.6,
+        ease: 'power3.out'
+      });
 
-    gsap.from('.three3d-container', {
-      scrollTrigger: {
-        trigger: '#sobre-sebas',
-        start: 'top 80%'
-      },
-      opacity: 0,
-      x: -30,
-      scale: 0.97,
-      duration: 0.7,
-      ease: 'power3.out'
-    });
+      gsap.from('.three3d-container', {
+        scrollTrigger: {
+          trigger: '#sobre-sebas',
+          start: 'top 80%'
+        },
+        opacity: 0,
+        x: -30,
+        scale: 0.97,
+        duration: 0.7,
+        ease: 'power3.out'
+      });
 
-    // Scroll trigger for Showcase section mockups
-    gsap.from('.showcase-main-frame', {
-      scrollTrigger: {
-        trigger: '#showcase',
-        start: 'top 75%'
-      },
-      opacity: 0,
-      y: 35,
-      scale: 0.98,
-      duration: 0.7,
-      ease: 'power3.out'
-    });
+      // Scroll trigger for Showcase section mockups
+      gsap.from('.showcase-main-frame', {
+        scrollTrigger: {
+          trigger: '#showcase',
+          start: 'top 75%'
+        },
+        opacity: 0,
+        y: 35,
+        scale: 0.98,
+        duration: 0.7,
+        ease: 'power3.out'
+      });
 
-    gsap.from('.showcase-mobile-frame', {
-      scrollTrigger: {
-        trigger: '#showcase',
-        start: 'top 70%'
-      },
-      opacity: 0,
-      x: 30,
-      y: 20,
-      duration: 0.7,
-      ease: 'power3.out'
-    });
+      gsap.from('.showcase-mobile-frame', {
+        scrollTrigger: {
+          trigger: '#showcase',
+          start: 'top 70%'
+        },
+        opacity: 0,
+        x: 30,
+        y: 20,
+        duration: 0.7,
+        ease: 'power3.out'
+      });
 
-    // Parallax background blobs with lower latency scrub
-    gsap.to('.glow-blob-1', {
-      scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.8
-      },
-      y: 200,
-      x: -100
-    });
+      // Parallax background blobs with lower latency scrub
+      gsap.to('.glow-blob-1', {
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.8
+        },
+        y: 200,
+        x: -100
+      });
 
-    gsap.to('.glow-blob-2', {
-      scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.0
-      },
-      y: -200,
-      x: 80
-    });
-  }
+      gsap.to('.glow-blob-2', {
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1.0
+        },
+        y: -200,
+        x: 80
+      });
+    }
 
   // 3D Mouse Tilt Interactive Parallax for Sebas' Bio Card ⚠️
   const cardContainer = document.querySelector('.three3d-container');
@@ -274,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const layersMid = document.querySelectorAll('.three3d-layer-mid'); // Backdrop text/shapes
   const layersBg = document.querySelectorAll('.three3d-layer-bg'); // Core card base elements
 
-  if (cardContainer && card3d) {
+  if (!isMobile && cardContainer && card3d) {
     // Ensure initial transform state is set via GSAP to match CSS and avoid first-frame jumps
     gsap.set(card3d, { rotateX: 0, rotateY: 0, transformPerspective: 1000, transformOrigin: '50% 50%', force3D: true });
     // Preserve CSS translateZ by setting z via GSAP so subsequent x/y animations keep correct depth
@@ -840,7 +861,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const preloaderTimeout = setTimeout(() => {
     removePreloader();
-  }, 6500);
+  }, isMobile ? 4500 : 6500);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (isMobile) {
+      setTimeout(removePreloader, 2500);
+    }
+  });
 
   window.addEventListener('load', () => {
     if (window.ScrollTrigger) {
@@ -849,4 +876,5 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(preloaderTimeout);
     removePreloader();
   });
+  }
 });

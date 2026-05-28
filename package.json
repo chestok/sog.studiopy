@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./public/tailwind.css --minify --content \"./index.html\" \"./src/**/*.{js,ts,jsx,tsx}\"",
+    "dev:css": "tailwindcss -i ./src/tailwind-input.css -o ./public/tailwind.css --watch --content \"./index.html\" \"./src/**/*.{js,ts,jsx,tsx}\"",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
@@ -23,6 +25,7 @@
     "vite": "^6.2.3"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",

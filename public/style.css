@@ -502,6 +502,7 @@ body.preloader-active {
 .page-preloader.page-preloader-hidden {
   pointer-events: none;
   visibility: hidden;
+  z-index: -1;
 }
 
 @keyframes preloader-rotate {
@@ -529,6 +530,38 @@ body.preloader-active {
 
   .preloader-copy {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .glow-blob,
+  .noise-overlay,
+  .hero-scroll-indicator,
+  .floating-shape-1,
+  .floating-shape-2,
+  .btn-glowing::before,
+  .whatsapp-pulse::before,
+  .whatsapp-pulse::after {
+    display: none;
+    animation: none;
+  }
+
+  .glass-panel,
+  .glass-panel-heavy,
+  .glass-card,
+  .preloader-inner {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  }
+
+  .preloader-ring {
+    box-shadow: none;
+  }
+
+  .page-preloader {
+    background: #090909;
   }
 }
 
