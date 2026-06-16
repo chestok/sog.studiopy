@@ -1,0 +1,30 @@
+# SOG.STUDIOPY - Robots.txt
+# Optimizado para SEO y rastreo de motores de búsqueda
+
+# Permitir a todos los bots rastrear el sitio
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /private
+Disallow: /.env
+Disallow: /.git
+
+# Dirección del sitemap
+Sitemap: https://sog.studiopy.com/sitemap.xml
+
+# Configuración específica para Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Configuración específica para Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bloquear bots maliciosos comunes
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+User-agent: MJ12bot
+Disallow: /
